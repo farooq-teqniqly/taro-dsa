@@ -25,4 +25,34 @@ public class CoreProblems
 
         return max;
     }
+
+    /// <summary>
+    /// Determines whether a given number is prime.
+    /// Time complexity: O(sqrt(n))
+    /// Space complexity: O(1)
+    /// </summary>
+    /// <param name="number">The number to check.</param>
+    /// <returns>True if the number is prime; otherwise, false.</returns>
+    public static bool IsPrime(int number)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(number);
+
+        switch (number)
+        {
+            case 1:
+                return false;
+            case 2:
+                return true;
+        }
+
+        for (var i = 2; i < Math.Ceiling(Math.Sqrt(number)); i++)
+        {
+            if (number % i == 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

@@ -20,4 +20,19 @@ public class CoreProblemTests
         var act = () => CoreProblems.FindMax(null!);
         act.Should().Throw<ArgumentNullException>();
     }
+
+    [Theory]
+    [InlineData(2, true)]
+    [InlineData(3, true)]
+    [InlineData(5, true)]
+    [InlineData(6, false)]
+    [InlineData(8, false)]
+    [InlineData(11, true)]
+    [InlineData(100, false)]
+    [InlineData(101, true)]
+    [InlineData(1, false)]
+    public void Can_Get_Primes(int number, bool expectedResult)
+    {
+        CoreProblems.IsPrime(number).Should().Be(expectedResult);
+    }
 }
