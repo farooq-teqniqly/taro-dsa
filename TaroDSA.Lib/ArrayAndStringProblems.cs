@@ -8,6 +8,7 @@
         public class Counter
         {
             public IReadOnlyDictionary<char, int> Counts { get; }
+            private readonly string _s;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="Counter"/> class with the specified string.
@@ -18,11 +19,40 @@
             {
                 ArgumentNullException.ThrowIfNull(s);
                 Counts = CreateFrequencyMap(s);
+                _s = s;
+            }
+
+            /// <summary>
+            /// Finds the most frequent character in the string. In the case of ties, the character
+            /// appearing first is returned.
+            /// Time complexity: O(n)
+            /// Space complexity: O(1)
+            /// </summary>
+            /// <returns>The character that appears most frequently in the string.</returns>
+            /// <exception cref="InvalidOperationException">Thrown when the string is empty.</exception>
+            public char MostFrequentCharacter()
+            {
+                var mostFrequent = _s[0];
+
+                for (var i = 1; i < _s.Length - 1; i++)
+                {
+                    var mostFrequentCount = Counts[mostFrequent];
+                    var thisChar = _s[i];
+                    var thisCount = Counts[thisChar];
+
+                    if (thisCount > mostFrequentCount)
+                    {
+                        mostFrequent = thisChar;
+                    }
+                }
+
+                return mostFrequent;
             }
 
             /// <summary>
             /// Determines whether the specified object is equal to the current object.
-            /// Time complexity: O(n) because each key value pair needs to be compared.  
+            /// Time complexity: O(n) because each key value pair needs to be compared.
+            /// Space complexity: O(1)
             /// </summary>
             /// <param name="obj">The object to compare with the current object.</param>
             /// <returns>True if the specified object is equal to the current object; otherwise, false.</returns>
@@ -45,8 +75,9 @@
 
             /// <summary>
             /// Returns a hash code for the current object.
-            /// Time complexity: O(n log n + n) because the keys are ordered prior to iterating the dictionary to calculate
-            /// the hash codes of the key value pairs.  
+            /// Time complexity: O(n log n) because the keys are ordered prior to iterating the dictionary to calculate
+            /// the hash codes of the key value pairs.
+            /// Space complexity: O(1) 
             /// </summary>
             /// <returns>A hash code for the current object.</returns>
             public override int GetHashCode()
@@ -103,9 +134,8 @@
         }
         /// <summary>
         /// Determines whether two strings are anagrams of each other.
-        /// Time complexity: O(a + b + c) where a and b represent building the two Counters and c represents
-        /// comparing the Counters.
-        /// Space complexity: O(a + b) for the two Counters.
+        /// Time complexity: O(n)
+        /// Space complexity: O(n)
         /// </summary>
         /// <param name="a">The first string to compare.</param>
         /// <param name="b">The second string to compare.</param>
@@ -122,6 +152,12 @@
             return aFrequencies.Equals(bFrequencies);
         }
 
+        public static char GetMostFrequentCharacter(string a)
+        {
+            ArgumentNullException.ThrowIfNull(a);
+
+            return new Counter(a).MostFrequentCharacter();
+        }
 
 
 

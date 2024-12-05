@@ -26,5 +26,17 @@ namespace TaroDSA.Tests
 
             act.Should().Throw<ArgumentNullException>();
         }
+
+        [Theory]
+        [InlineData("potato", 'o')]
+        [InlineData("bookeeper", 'e')]
+        [InlineData("david", 'd')]
+        [InlineData("abby", 'b')]
+        [InlineData("mississippi", 'i')]
+        [InlineData("a", 'a')]
+        public void Can_Get_The_Most_Frequent_Character(string s, char expectedResult)
+        {
+            ArrayAndStringProblems.GetMostFrequentCharacter(s).Should().Be(expectedResult);
+        }
     }
 }
