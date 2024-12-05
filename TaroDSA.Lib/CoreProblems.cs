@@ -5,7 +5,7 @@ public class CoreProblems
     /// <summary>
     /// Finds the maximum value in a collection of integers.
     /// Time complexity: O(n)
-    /// Space complexity: O(1) as no new storage is created.
+    /// Space complexity: O(1)
     /// </summary>
     /// <param name="numbers">The collection of integers.</param>
     /// <returns>The maximum value in the collection.</returns>
