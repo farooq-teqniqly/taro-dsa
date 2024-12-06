@@ -310,5 +310,73 @@
 
             return [];
         }
+
+        /// <summary>
+        /// Finds the intersection of two arrays using a brute-force approach.
+        /// Time complexity: O(a * b)
+        /// Space complexity: O(min(a, b)))
+        /// </summary>
+        /// <param name="a">The first array.</param>
+        /// <param name="b">The second array.</param>
+        /// <returns>An IEnumerable containing the intersection of the two arrays.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when either input array is null.</exception>
+        public static IEnumerable<int> IntersectionBruteForce(int[] a, int[] b)
+        {
+            ArgumentNullException.ThrowIfNull(a);
+            ArgumentNullException.ThrowIfNull(b);
+
+            if (a.Length == 0 || b.Length == 0)
+            {
+                return [];
+            }
+
+            var intersection = new List<int>();
+
+            for (var i = 0; i < a.Length; i++)
+            {
+                for (var j = 0; j < b.Length; j++)
+                {
+                    if (a[i] == b[j])
+                    {
+                        intersection.Add(a[i]);
+                    }
+                }
+            }
+
+            return intersection;
+        }
+
+        /// <summary>
+        /// Finds the intersection of two arrays.
+        /// Time complexity: O(a + b)
+        /// Space complexity: O(b)
+        /// </summary>
+        /// <param name="a">The first array.</param>
+        /// <param name="b">The second array.</param>
+        /// <returns>An IEnumerable containing the intersection of the two arrays.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when either input array is null.</exception>
+        public static IEnumerable<int> Intersection(int[] a, int[] b)
+        {
+            ArgumentNullException.ThrowIfNull(a);
+            ArgumentNullException.ThrowIfNull(b);
+
+            if (a.Length == 0 || b.Length == 0)
+            {
+                return [];
+            }
+
+            var intersection = new List<int>();
+            var set = new HashSet<int>(b);
+
+            for (var i = 0; i < a.Length; i++)
+            {
+                if (set.Contains(a[i]))
+                {
+                    intersection.Add(a[i]);
+                }
+            }
+
+            return intersection;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Runtime.InteropServices;
+using FluentAssertions;
 using TaroDSA.Lib;
 
 namespace TaroDSA.Tests
@@ -119,6 +120,54 @@ namespace TaroDSA.Tests
         public void PairProduct_When_Input_Null_Throws()
         {
             var act = () => ArrayAndStringProblems.PairProduct(null!, 10);
+
+            act.Should().Throw<ArgumentNullException>();
+        }
+
+        [Theory]
+        [InlineData(new[] {3, 6, 9, 2, 10}, new[] {4, 2, 1, 6}, new[] {6, 2})]
+        [InlineData(new[] {2, 4, 6}, new[] {4, 2}, new[] {2, 4})]
+        [InlineData(new[] {4, 2, 1}, new[] {1, 2, 4, 6}, new[] {4, 2, 1})]
+        [InlineData(new[] {4, 2, 1}, new[] {5, 6, 7}, new int[0])]
+        [InlineData(new int[0], new[] {1}, new int[0])]
+        [InlineData(new[] {1}, new int[0], new int[0])]
+        [InlineData(new int[0], new int[0], new int[0])]
+        public void IntersectionBruteForce_Returns_Expected_Result(int[] a, int[] b, int[] expectedResult)
+        {
+            ArrayAndStringProblems.IntersectionBruteForce(a, b).Should().Equal(expectedResult);
+        }
+
+        [Theory]
+        [InlineData(new[] {1, 2}, null)]
+        [InlineData(null, new[] {1, 2})]
+        [InlineData(null, null)]
+        public void IntersectionBruteForce_When_Arrays_Null_Throws(int[] a, int[] b)
+        {
+            var act = () => ArrayAndStringProblems.IntersectionBruteForce(a, b);
+
+            act.Should().Throw<ArgumentNullException>();
+        }
+
+        [Theory]
+        [InlineData(new[] { 3, 6, 9, 2, 10 }, new[] { 4, 2, 1, 6 }, new[] { 6, 2 })]
+        [InlineData(new[] { 2, 4, 6 }, new[] { 4, 2 }, new[] { 2, 4 })]
+        [InlineData(new[] { 4, 2, 1 }, new[] { 1, 2, 4, 6 }, new[] { 4, 2, 1 })]
+        [InlineData(new[] { 4, 2, 1 }, new[] { 5, 6, 7 }, new int[0])]
+        [InlineData(new int[0], new[] { 1 }, new int[0])]
+        [InlineData(new[] { 1 }, new int[0], new int[0])]
+        [InlineData(new int[0], new int[0], new int[0])]
+        public void Intersection_Returns_Expected_Result(int[] a, int[] b, int[] expectedResult)
+        {
+            ArrayAndStringProblems.Intersection(a, b).Should().Equal(expectedResult);
+        }
+
+        [Theory]
+        [InlineData(new[] { 1, 2 }, null)]
+        [InlineData(null, new[] { 1, 2 })]
+        [InlineData(null, null)]
+        public void Intersection_When_Arrays_Null_Throws(int[] a, int[] b)
+        {
+            var act = () => ArrayAndStringProblems.Intersection(a, b);
 
             act.Should().Throw<ArgumentNullException>();
         }
