@@ -194,5 +194,38 @@
 
             return [];
         }
+
+        /// <summary>
+        /// Finds a pair of numbers in the given array that sum up to the target value using a
+        /// brute-force approach.
+        /// Time complexity: O(n^2)
+        /// Space complexity: O(1)
+        /// </summary>
+        /// <param name="arr">The array of numbers.</param>
+        /// <param name="target">The target sum.</param>
+        /// <returns>An array containing the indices of the pair of numbers that sum up to the target value.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is null.</exception>
+        public static int[] PairSumBruteForce(int[] arr, int target)
+        {
+            ArgumentNullException.ThrowIfNull(arr);
+
+            if (arr.Length == 0)
+            {
+                return [];
+            }
+
+            for (var i = 0; i < arr.Length; i++)
+            {
+                for (var j = i + 1; j < arr.Length; j++)
+                {
+                    if (arr[j] + arr[i] == target)
+                    {
+                        return [i, j];
+                    }
+                }
+            }
+
+            return [];
+        }
     }
 }

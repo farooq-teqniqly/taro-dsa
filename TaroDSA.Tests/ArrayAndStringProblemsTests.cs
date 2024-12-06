@@ -47,7 +47,7 @@ namespace TaroDSA.Tests
         [InlineData(new[] {4, -7, 9, -2, 5, 1}, -9, new[] {1, 3})]
         [InlineData(new[] {4, -7, 9, 21, 5, 1}, 14, new[] {1, 3})]
         [InlineData(new int[0], 1, new int[0])]
-        public void Pair_Sum_Returns_Expected_Indices(int[] arr, int target, int[] expectedResult)
+        public void PairSum_Returns_Expected_Indices(int[] arr, int target, int[] expectedResult)
         {
             ArrayAndStringProblems.PairSum(arr, target).Should().Equal(expectedResult);
         }
@@ -56,6 +56,27 @@ namespace TaroDSA.Tests
         public void PairSum_When_Input_Null_Throws()
         {
             var act = () => ArrayAndStringProblems.PairSum(null!, 10);
+
+            act.Should().Throw<ArgumentNullException>();
+        }
+
+        [Theory]
+        [InlineData(new[] { 3, 2, 5, 4, 1 }, 8, new[] { 0, 2 })]
+        [InlineData(new[] { 4, 7, 9, 2, 5, 1 }, 5, new[] { 0, 5 })]
+        [InlineData(new[] { 4, 7, 9, 2, 5, 1 }, 3, new[] { 3, 5 })]
+        [InlineData(new[] { 4, 7, 9, 2, 5, 1 }, 20, new int[0])]
+        [InlineData(new[] { 4, -7, 9, -2, 5, 1 }, -9, new[] { 1, 3 })]
+        [InlineData(new[] { 4, -7, 9, 21, 5, 1 }, 14, new[] { 1, 3 })]
+        [InlineData(new int[0], 1, new int[0])]
+        public void PairSumBruteForce_Returns_Expected_Indices(int[] arr, int target, int[] expectedResult)
+        {
+            ArrayAndStringProblems.PairSumBruteForce(arr, target).Should().Equal(expectedResult);
+        }
+
+        [Fact]
+        public void PairSumBruteForce_When_Input_Null_Throws()
+        {
+            var act = () => ArrayAndStringProblems.PairSumBruteForce(null!, 10);
 
             act.Should().Throw<ArgumentNullException>();
         }
