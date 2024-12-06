@@ -80,5 +80,47 @@ namespace TaroDSA.Tests
 
             act.Should().Throw<ArgumentNullException>();
         }
+
+        [Theory]
+        [InlineData(new[] { 4, 7, 9, 2, 5, 1 }, 35, new[] { 1, 4 })]
+        [InlineData(new[] { 4, 7, 9, 2, 5, 1 }, 9, new[] { 2, 5 })]
+        [InlineData(new[] { 4, -7, 9, -2, 5, 1 }, 14, new[] { 1, 3 })]
+        [InlineData(new[] { 4, -7, 9, 21, 5, 1 }, -147, new[] { 1, 3 })]
+        [InlineData(new[] { 4, -7, 9, 21, 5, 1 }, 0, new int[0])]
+        [InlineData(new int[0], 1, new int[0])]
+        [InlineData(new[] { 0, -7, 9, 21, 5, 1 }, -147, new[] { 1, 3 })]
+        public void PairProductBruteForce_Returns_Expected_Indices(int[] arr, int target, int[] expectedResult)
+        {
+            ArrayAndStringProblems.PairProductBruteForce(arr, target).Should().Equal(expectedResult);
+        }
+
+        [Fact]
+        public void PairProductBruteForce_When_Input_Null_Throws()
+        {
+            var act = () => ArrayAndStringProblems.PairProductBruteForce(null!, 10);
+
+            act.Should().Throw<ArgumentNullException>();
+        }
+
+        [Theory]
+        [InlineData(new[] { 4, 7, 9, 2, 5, 1 }, 35, new[] { 1, 4 })]
+        [InlineData(new[] { 4, 7, 9, 2, 5, 1 }, 9, new[] { 2, 5 })]
+        [InlineData(new[] { 4, -7, 9, -2, 5, 1 }, 14, new[] { 1, 3 })]
+        [InlineData(new[] { 4, -7, 9, 21, 5, 1 }, -147, new[] { 1, 3 })]
+        [InlineData(new[] { 0, -7, 9, 21, 5, 1 }, -147, new[] { 1, 3 })]
+        [InlineData(new[] { 4, -7, 9, 21, 5, 1 }, 0, new int[0])]
+        [InlineData(new int[0], 1, new int[0])]
+        public void PairProduct_Returns_Expected_Indices(int[] arr, int target, int[] expectedResult)
+        {
+            ArrayAndStringProblems.PairProduct(arr, target).Should().Equal(expectedResult);
+        }
+
+        [Fact]
+        public void PairProduct_When_Input_Null_Throws()
+        {
+            var act = () => ArrayAndStringProblems.PairProduct(null!, 10);
+
+            act.Should().Throw<ArgumentNullException>();
+        }
     }
 }

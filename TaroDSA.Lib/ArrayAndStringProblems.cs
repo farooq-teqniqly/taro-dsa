@@ -227,5 +227,88 @@
 
             return [];
         }
+
+        /// <summary>
+        /// Finds a pair of numbers in the given array that multiply to the target value using a
+        /// brute-force approach.
+        /// Time complexity: O(n^2)
+        /// Space complexity: O(1)
+        /// </summary>
+        /// <param name="arr">The array of numbers.</param>
+        /// <param name="target">The target product.</param>
+        /// <returns>An array containing the indices of the pair of numbers that multiply to the target value.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is null.</exception>
+        public static int[] PairProductBruteForce(int[] arr, int target)
+        {
+            ArgumentNullException.ThrowIfNull(arr);
+
+            if (arr.Length == 0)
+            {
+                return [];
+            }
+
+            for (var i = 0; i < arr.Length; i++)
+            {
+                for (var j = 0; j < arr.Length; j++)
+                {
+                    if (arr[i] * arr[j] == target)
+                    {
+                        return [i, j];
+                    }
+                }
+            }
+
+            return [];
+        }
+
+        /// <summary>
+        /// Finds a pair of numbers in the given array that multiply to the target value.
+        /// Time complexity: O(n)
+        /// Space complexity: O(n)
+        /// </summary>
+        /// <param name="arr">The array of numbers.</param>
+        /// <param name="target">The target product.</param>
+        /// <returns>An array containing the indices of the pair of numbers that multiply to the target value.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is null.</exception>
+        public static int[] PairProduct(int[] arr, int target)
+        {
+            ArgumentNullException.ThrowIfNull(arr);
+
+            if (arr.Length == 0)
+            {
+                return [];
+            }
+
+            var map = new Dictionary<int, int>();
+
+
+            for (var i = 0; i < arr.Length; i++)
+            {
+                var current = arr[i];
+
+                if (current == 0)
+                {
+                    continue;
+                }
+
+                var remainder = target % current;
+
+                if (remainder != 0)
+                {
+                    continue;
+                }
+
+                var complement = target / current;
+
+                if (map.TryGetValue(complement, out var value))
+                {
+                    return [value, i];
+                }
+                
+                map.Add(current, i);
+            }
+
+            return [];
+        }
     }
 }
