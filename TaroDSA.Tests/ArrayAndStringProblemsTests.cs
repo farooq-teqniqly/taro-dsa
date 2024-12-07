@@ -196,20 +196,21 @@ namespace TaroDSA.Tests
         public static IEnumerable<object[]> TripletSumTestCases =>
             new List<object[]>
             {
-                new object[] { new[] { 0, -1, 2, -3, 1 }, new HashSet<int[]>
+                new object[] { new[] { 0, -1, 2, -3, 1 }, new List<int[]>
                 {
                     new[] { -3, 1, 2 },
                     new[] { -1, 0, 1 }
                 } },
-                new object[] { new[] { -4, -4, -2, 0, 0, 1, 2, 3 }, new HashSet<int[]>
+                new object[] { new[] { -4, -4, -2, 0, 0, 1, 2, 3 }, new List<int[]>
                 {
+                    new[] {-4, 1, 3},
                     new[] { -2, 0, 2 }
                 } }
             };
 
         [Theory]
         [MemberData(nameof(TripletSumTestCases))]
-        public void TripletSum_Returns_Expected_Indices(int[] arr, HashSet<int[]> expectedResult)
+        public void TripletSum_Returns_Expected_Indices(int[] arr, List<int[]> expectedResult)
         {
             var actualResult = ArrayAndStringProblems.TripletSum(arr);
 

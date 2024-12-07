@@ -418,29 +418,45 @@
             return [];
         }
 
-        public static HashSet<int[]> TripletSum(int[] arr)
+        public static List<int[]> TripletSum(int[] arr)
         {
-            var triplets = new HashSet<int[]>();
-
+            var triplets = new List<int[]>();
             Array.Sort(arr);
-            
-            // -3, -1, 0, 1, 2
-            for (var i = 0; i < arr.Length; i++)
+
+            for(var i = 0; i < arr.Length; i++)
             {
+                // Positive numbers can't add up to zero. Since it's a sorted array, exit.
+                if (arr[i] > 0)
+                {
+                    break;
+                }
+
+                // Prevents duplicates resulting from arr[i].
+                if (i > 0 && arr[i] == arr[i - 1])
+                {
+                    continue;
+                }
+
                 var leftIndex = i + 1;
                 var rightIndex = arr.Length - 1;
 
                 while (leftIndex < rightIndex)
                 {
-                    var sum = arr[i] + arr[leftIndex] + arr[rightIndex];
-
-                    if (sum == 0)
+                    // Prevents duplicates resulting from arr[left].
+                    if (arr[leftIndex] == arr[leftIndex - 1])
                     {
-                        triplets.Add(new[] { arr[i], arr[leftIndex], arr[rightIndex] });
-                        break;
+                        leftIndex++;
                     }
 
-                    if (sum < 0)
+                    var target = -arr[i];
+                    var sum = arr[leftIndex] + arr[rightIndex];
+
+                    if (sum == target)
+                    {
+                        triplets.Add([arr[i], arr[leftIndex], arr[rightIndex]]);
+                        leftIndex++;
+                    }
+                    else if (sum < target)
                     {
                         leftIndex++;
                     }
@@ -449,7 +465,6 @@
                         rightIndex--;
                     }
                 }
-                    
             }
 
             return triplets;
