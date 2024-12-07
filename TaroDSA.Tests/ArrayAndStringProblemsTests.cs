@@ -171,5 +171,26 @@ namespace TaroDSA.Tests
 
             act.Should().Throw<ArgumentNullException>();
         }
+
+        [Theory]
+        [InlineData(new[] {-5, -2, 3, 4, 6}, 7, new[] {2, 3})]
+        [InlineData(new[] {1, 1, 1}, 2, new[] {0, 2})]
+        [InlineData(new[] {1, 1, 1}, 4, new int[0])]
+        [InlineData(new int[0], 1, new int[0])]
+        [InlineData(new[] {1}, 1, new int[0])]
+        [InlineData(new[] {-2, 4, 5}, 9, new[] {1, 2})]
+        [InlineData(new[] {-4, -3, -2, 0}, -5, new[] {1, 2})]
+        public void PairSumSorted_Returns_Expected_Indices(int[] arr, int target, int[] expectedResult)
+        {
+            ArrayAndStringProblems.PairSumSorted(arr, target).Should().Equal(expectedResult);
+        }
+
+        [Fact]
+        public void PairSumSorted_When_Array_Null_Throws()
+        {
+            var act = () => ArrayAndStringProblems.PairSumSorted(null!, 0);
+
+            act.Should().Throw<ArgumentNullException>();
+        }
     }
 }

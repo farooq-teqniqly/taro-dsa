@@ -378,5 +378,44 @@
 
             return intersection;
         }
+
+        /// <summary>
+        /// Finds a pair of numbers in the given array that sum up to the target value.
+        /// Time complexity: O(n)
+        /// Space complexity: O(1)
+        /// </summary>
+        /// <param name="arr">The array of numbers.</param>
+        /// <param name="target">The target sum.</param>
+        /// <returns>An array containing the indices of the pair of numbers that sum up to the target value.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is null.</exception>
+        public static int[] PairSumSorted(int[] arr, int target)
+        {
+            ArgumentNullException.ThrowIfNull(arr);
+
+            var arrLength = arr.Length;
+            var leftIndex = 0;
+            var rightIndex = arrLength - 1;
+
+            for (var i = 0; i < arrLength; i++)
+            {
+                var sum = arr[leftIndex] + arr[rightIndex];
+
+                if (sum == target)
+                {
+                    return [leftIndex, rightIndex];
+                }
+
+                if (sum < target)
+                {
+                    leftIndex++;
+                }
+                else
+                {
+                    rightIndex--;
+                }
+            }
+
+            return [];
+        }
     }
 }
