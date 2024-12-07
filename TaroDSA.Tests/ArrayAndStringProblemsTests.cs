@@ -192,5 +192,30 @@ namespace TaroDSA.Tests
 
             act.Should().Throw<ArgumentNullException>();
         }
+
+        public static IEnumerable<object[]> TripletSumTestCases =>
+            new List<object[]>
+            {
+                new object[] { new[] { 0, -1, 2, -3, 1 }, new HashSet<int[]>
+                {
+                    new[] { -3, 1, 2 },
+                    new[] { -1, 0, 1 }
+                } },
+                new object[] { new[] { -4, -4, -2, 0, 0, 1, 2, 3 }, new HashSet<int[]>
+                {
+                    new[] { -2, 0, 2 }
+                } }
+            };
+
+        [Theory]
+        [MemberData(nameof(TripletSumTestCases))]
+        public void TripletSum_Returns_Expected_Indices(int[] arr, HashSet<int[]> expectedResult)
+        {
+            var actualResult = ArrayAndStringProblems.TripletSum(arr);
+
+            actualResult.Count.Should().Be(expectedResult.Count);
+            actualResult.First().Should().Equal(expectedResult.First());
+            actualResult.Skip(1).First().Should().Equal(expectedResult.Skip(1).First());
+        }
     }
 }

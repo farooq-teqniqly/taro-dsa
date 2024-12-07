@@ -417,5 +417,42 @@
 
             return [];
         }
+
+        public static HashSet<int[]> TripletSum(int[] arr)
+        {
+            var triplets = new HashSet<int[]>();
+
+            Array.Sort(arr);
+            
+            // -3, -1, 0, 1, 2
+            for (var i = 0; i < arr.Length; i++)
+            {
+                var leftIndex = i + 1;
+                var rightIndex = arr.Length - 1;
+
+                while (leftIndex < rightIndex)
+                {
+                    var sum = arr[i] + arr[leftIndex] + arr[rightIndex];
+
+                    if (sum == 0)
+                    {
+                        triplets.Add(new[] { arr[i], arr[leftIndex], arr[rightIndex] });
+                        break;
+                    }
+
+                    if (sum < 0)
+                    {
+                        leftIndex++;
+                    }
+                    else
+                    {
+                        rightIndex--;
+                    }
+                }
+                    
+            }
+
+            return triplets;
+        }
     }
 }
