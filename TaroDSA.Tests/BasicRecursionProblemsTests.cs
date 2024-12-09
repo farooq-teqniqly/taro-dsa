@@ -11,13 +11,13 @@ public class BasicRecursionProblemsTests
         var beforeCallbackCallCount = 0;
         var afterCallbackCallCount = 0;
 
-        void BeforeCountdownCallback(int n) => beforeCallbackCallCount++;
-        void AfterCountdownCallback(int n) => afterCallbackCallCount++;
-
         BasicRecursionProblems.Countdown(startFrom, BeforeCountdownCallback, AfterCountdownCallback);
 
         beforeCallbackCallCount.Should().Be(startFrom);
         afterCallbackCallCount.Should().Be(startFrom);
+        return;
 
+        void AfterCountdownCallback(int n) => afterCallbackCallCount++;
+        void BeforeCountdownCallback(int n) => beforeCallbackCallCount++;
     }
 }
