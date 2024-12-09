@@ -32,4 +32,22 @@ public class BasicRecursionProblemsTests
         void AfterCountdownCallback(int n) => afterCallbackCallCount++;
         void BeforeCountdownCallback(int n) => beforeCallbackCallCount++;
     }
+
+    [Theory]
+    [InlineData(new[] { 5, 2, 9, 10 }, 26)]
+    [InlineData(new[] { 1, -1, 1, -1, 1, -1, 1 }, 1)]
+    [InlineData(new[] { 1000, 0, 0, 0, 0, 0, 1 }, 1001)]
+    [InlineData(new int[0], 0)]
+    public void RecursiveSum_Returns_Expected_Result(int[] arr, int expectedResult)
+    {
+        BasicRecursionProblems.RecursiveSum(arr).Should().Be(expectedResult);
+    }
+
+    [Fact]
+    public void RecursiveSum_When_Array_Is_Null_Throws()
+    {
+        var act = () => BasicRecursionProblems.RecursiveSum(null!);
+
+        act.Should().Throw<ArgumentNullException>();
+    }
 }

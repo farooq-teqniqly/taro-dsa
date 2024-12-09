@@ -17,4 +17,21 @@ public class BasicRecursionProblems
         Countdown(startFrom - step, endInclusive, beforeCountdownCallback, afterCountdownCallback, step);
         afterCountdownCallback?.Invoke(startFrom);
     }
+
+    public static int RecursiveSum(int[] arr)
+    {
+        ArgumentNullException.ThrowIfNull(arr);
+
+        return arr.Length == 0 ? 0 : RecursiveSum(arr, 0);
+    }
+
+    private static int RecursiveSum(int[] arr, int firstIndex)
+    {
+        if (firstIndex == arr.Length)
+        {
+            return 0;
+        }
+
+        return arr[firstIndex] + RecursiveSum(arr, firstIndex + 1);
+    }
 }
