@@ -1,4 +1,4 @@
-﻿namespace TaroDSA.Lib;
+namespace TaroDSA.Lib;
 
 public class CoreProblems
 {

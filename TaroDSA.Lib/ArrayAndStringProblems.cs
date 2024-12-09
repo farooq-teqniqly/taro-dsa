@@ -304,7 +304,7 @@ public class ArrayAndStringProblems
             {
                 return [value, i];
             }
-            
+
             map.Add(current, i);
         }
 
@@ -366,7 +366,7 @@ public class ArrayAndStringProblems
         }
 
         var intersection = new List<int>();
-        HashSet<int> set = [..b];
+        HashSet<int> set = [.. b];
 
         for (var i = 0; i < a.Length; i++)
         {
@@ -430,7 +430,7 @@ public class ArrayAndStringProblems
         var triplets = new List<int[]>();
         Array.Sort(arr);
 
-        for(var i = 0; i < arr.Length; i++)
+        for (var i = 0; i < arr.Length; i++)
         {
             // Positive numbers can't add up to zero. Since it's a sorted array, exit.
             if (arr[i] > 0)

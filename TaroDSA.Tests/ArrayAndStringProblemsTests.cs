@@ -41,12 +41,12 @@ public class ArrayAndStringProblemsTests
     }
 
     [Theory]
-    [InlineData(new[] {3, 2, 5, 4, 1}, 8, new[] {0, 2})]
-    [InlineData(new[] {4, 7, 9, 2, 5, 1}, 5, new[] {0, 5})]
-    [InlineData(new[] {4, 7, 9, 2, 5, 1}, 3, new[] {3, 5})]
-    [InlineData(new[] {4, 7, 9, 2, 5, 1}, 20, new int[0])]
-    [InlineData(new[] {4, -7, 9, -2, 5, 1}, -9, new[] {1, 3})]
-    [InlineData(new[] {4, -7, 9, 21, 5, 1}, 14, new[] {1, 3})]
+    [InlineData(new[] { 3, 2, 5, 4, 1 }, 8, new[] { 0, 2 })]
+    [InlineData(new[] { 4, 7, 9, 2, 5, 1 }, 5, new[] { 0, 5 })]
+    [InlineData(new[] { 4, 7, 9, 2, 5, 1 }, 3, new[] { 3, 5 })]
+    [InlineData(new[] { 4, 7, 9, 2, 5, 1 }, 20, new int[0])]
+    [InlineData(new[] { 4, -7, 9, -2, 5, 1 }, -9, new[] { 1, 3 })]
+    [InlineData(new[] { 4, -7, 9, 21, 5, 1 }, 14, new[] { 1, 3 })]
     [InlineData(new int[0], 1, new int[0])]
     public void PairSum_Returns_Expected_Indices(int[] arr, int target, int[] expectedResult)
     {
@@ -125,12 +125,12 @@ public class ArrayAndStringProblemsTests
     }
 
     [Theory]
-    [InlineData(new[] {3, 6, 9, 2, 10}, new[] {4, 2, 1, 6}, new[] {6, 2})]
-    [InlineData(new[] {2, 4, 6}, new[] {4, 2}, new[] {2, 4})]
-    [InlineData(new[] {4, 2, 1}, new[] {1, 2, 4, 6}, new[] {4, 2, 1})]
-    [InlineData(new[] {4, 2, 1}, new[] {5, 6, 7}, new int[0])]
-    [InlineData(new int[0], new[] {1}, new int[0])]
-    [InlineData(new[] {1}, new int[0], new int[0])]
+    [InlineData(new[] { 3, 6, 9, 2, 10 }, new[] { 4, 2, 1, 6 }, new[] { 6, 2 })]
+    [InlineData(new[] { 2, 4, 6 }, new[] { 4, 2 }, new[] { 2, 4 })]
+    [InlineData(new[] { 4, 2, 1 }, new[] { 1, 2, 4, 6 }, new[] { 4, 2, 1 })]
+    [InlineData(new[] { 4, 2, 1 }, new[] { 5, 6, 7 }, new int[0])]
+    [InlineData(new int[0], new[] { 1 }, new int[0])]
+    [InlineData(new[] { 1 }, new int[0], new int[0])]
     [InlineData(new int[0], new int[0], new int[0])]
     public void IntersectionBruteForce_Returns_Expected_Result(int[] a, int[] b, int[] expectedResult)
     {
@@ -138,8 +138,8 @@ public class ArrayAndStringProblemsTests
     }
 
     [Theory]
-    [InlineData(new[] {1, 2}, null)]
-    [InlineData(null, new[] {1, 2})]
+    [InlineData(new[] { 1, 2 }, null)]
+    [InlineData(null, new[] { 1, 2 })]
     [InlineData(null, null)]
     public void IntersectionBruteForce_When_Arrays_Null_Throws(int[] a, int[] b)
     {
@@ -173,13 +173,13 @@ public class ArrayAndStringProblemsTests
     }
 
     [Theory]
-    [InlineData(new[] {-5, -2, 3, 4, 6}, 7, new[] {2, 3})]
-    [InlineData(new[] {1, 1, 1}, 2, new[] {0, 2})]
-    [InlineData(new[] {1, 1, 1}, 4, new int[0])]
+    [InlineData(new[] { -5, -2, 3, 4, 6 }, 7, new[] { 2, 3 })]
+    [InlineData(new[] { 1, 1, 1 }, 2, new[] { 0, 2 })]
+    [InlineData(new[] { 1, 1, 1 }, 4, new int[0])]
     [InlineData(new int[0], 1, new int[0])]
-    [InlineData(new[] {1}, 1, new int[0])]
-    [InlineData(new[] {-2, 4, 5}, 9, new[] {1, 2})]
-    [InlineData(new[] {-4, -3, -2, 0}, -5, new[] {1, 2})]
+    [InlineData(new[] { 1 }, 1, new int[0])]
+    [InlineData(new[] { -2, 4, 5 }, 9, new[] { 1, 2 })]
+    [InlineData(new[] { -4, -3, -2, 0 }, -5, new[] { 1, 2 })]
     public void PairSumSorted_Returns_Expected_Indices(int[] arr, int target, int[] expectedResult)
     {
         ArrayAndStringProblems.PairSumSorted(arr, target).Should().Equal(expectedResult);
@@ -196,19 +196,20 @@ public class ArrayAndStringProblemsTests
     public static IEnumerable<object[]> TripletSumTestCases =>
         (List<object[]>)
         [
-            [new[] { 0, -1, 2, -3, 1 }, (List<int[]>) [[-3, 1, 2], [-1, 0, 1]]],
+            [new[] { 0, -1, 2, -3, 1 }, (List<int[]>)[[-3, 1, 2], [-1, 0, 1]]],
 
             [
-                new[] { -4, -4, -2, 0, 0, 1, 2, 3 }, (List<int[]>) [[-4, 1, 3], [-2, 0, 2]]
+                new[] { -4, -4, -2, 0, 0, 1, 2, 3 },
+                (List<int[]>)[[-4, 1, 3], [-2, 0, 2]]
             ],
 
             [Array.Empty<int>(), new List<int[]>()],
-            [(int[]) [1], new List<int[]>()],
+            [(int[])[1], new List<int[]>()],
             [new[] { 1, -1 }, new List<int[]>()],
-            [new[] { 0, 0, 0 }, (List<int[]>) [[0, 0, 0]]],
+            [new[] { 0, 0, 0 }, (List<int[]>)[[0, 0, 0]]],
 
             [new[] { 1, 0, 1 }, new List<int[]>()],
-            [new[] { 0, 0, 1, -1, 1, -1 }, (List<int[]>) [[-1, 0, 1]]],
+            [new[] { 0, 0, 1, -1, 1, -1 }, (List<int[]>)[[-1, 0, 1]]],
 
             [new[] { 1, 2, 3 }, new List<int[]>()]
 

@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using TaroDSA.Lib;
 
 namespace TaroDSA.Tests;
