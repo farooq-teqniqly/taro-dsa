@@ -34,6 +34,16 @@ public class BasicRecursionProblemsTests
     }
 
     [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void Countdown_When_Step_Is_Zero_Or_Negative_Throws(int step)
+    {
+        var act = () => BasicRecursionProblems.Countdown(1, 0, step: step);
+
+        act.Should().Throw<ArgumentOutOfRangeException>();
+    }
+
+    [Theory]
     [InlineData(new[] { 5, 2, 9, 10 }, 26)]
     [InlineData(new[] { 1, -1, 1, -1, 1, -1, 1 }, 1)]
     [InlineData(new[] { 1000, 0, 0, 0, 0, 0, 1 }, 1001)]

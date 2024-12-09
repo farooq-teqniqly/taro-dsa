@@ -8,6 +8,8 @@ public class BasicRecursionProblems
         Action<int>? afterCountdownCallback = null,
         int step = 1)
     {
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(step);
+
         if (startFrom <= endInclusive - 1)
         {
             return;
