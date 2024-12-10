@@ -150,4 +150,49 @@ public class LinkedListProblemTests
 
         act.Should().Throw<ArgumentNullException>();
     }
+
+    [Fact]
+    public void Can_Reverse_Linked_List()
+    {
+        var f = new Node<char>('f');
+        var i = new Node<char>('i');
+        var s = new Node<char>('s');
+        var h = new Node<char>('h');
+
+        f.Next = i;
+        i.Next = s;
+        s.Next = h;
+
+        var newHead = Lib.DS.LinkedList<char>.Reverse(f);
+        newHead.Value.Should().Be('h');
+
+        var sb = new StringBuilder(4);
+
+        void Visit(Node<char> node)
+        {
+            sb.Append(node.Value);
+        }
+
+        Lib.DS.LinkedList<char>.Traverse(newHead, Visit, Lib.DS.LinkedList<char>.ExecutionMode.Iterative);
+
+        sb.ToString().Should().Be("hsif");
+    }
+
+    [Fact]
+    public void Can_Reverse_One_Node_Linked_List()
+    {
+        var f = new Node<char>('f');
+
+        var newHead = Lib.DS.LinkedList<char>.Reverse(f);
+
+        newHead.Value.Should().Be('f');
+    }
+
+    [Fact]
+    public void Reverse_Throws_When_Head_Is_Null()
+    {
+        var act = () => Lib.DS.LinkedList<char>.Reverse(null!);
+
+        act.Should().Throw<ArgumentNullException>();
+    }
 }

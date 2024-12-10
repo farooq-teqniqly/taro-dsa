@@ -142,4 +142,29 @@ public class LinkedList<T>
 
         throw new IndexOutOfRangeException();
     }
+
+    /// <summary>
+    /// Reverses the linked list starting from the given head node.
+    /// </summary>
+    /// <param name="head">The head node of the linked list to reverse.</param>
+    /// <returns>The new head node of the reversed linked list.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when the head node is null.</exception>
+    public static Node<T> Reverse(Node<T> head)
+    {
+        ArgumentNullException.ThrowIfNull(head);
+
+        Node<T>? previous = null;
+        var current = head;
+        var next = current.Next;
+
+        while (current != null)
+        {
+            current.Next = previous;
+            previous = current;
+            current = next;
+            next = current?.Next;
+        }
+
+        return previous!;
+    }
 }
