@@ -195,4 +195,98 @@ public class LinkedListProblemTests
 
         act.Should().Throw<ArgumentNullException>();
     }
+
+    [Fact]
+    public void Can_Zipper_Two_Lists_When_First_Is_Longer_Than_Second()
+    {
+        var f = new Node<char>('f');
+        var i = new Node<char>('i');
+        var s = new Node<char>('s');
+        var h = new Node<char>('h');
+
+        f.Next = i;
+        i.Next = s;
+        s.Next = h;
+
+        var b = new Node<char>('b');
+        var u = new Node<char>('u');
+        
+
+        b.Next = u;
+        
+        var head = Lib.DS.LinkedList<char>.Zipper(f, b);
+
+        var sb = new StringBuilder(6);
+
+        void Visit(Node<char> node)
+        {
+            sb.Append(node.Value);
+        }
+
+        Lib.DS.LinkedList<char>.Traverse(head, Visit, Lib.DS.LinkedList<char>.ExecutionMode.Iterative);
+
+        sb.ToString().Should().Be("fbiush");
+    }
+
+    [Fact]
+    public void Can_Zipper_Two_Lists_When_Second_Is_Longer_Than_First()
+    {
+        var b = new Node<char>('b');
+        var u = new Node<char>('u');
+        b.Next = u;
+
+        var f = new Node<char>('f');
+        var i = new Node<char>('i');
+        var s = new Node<char>('s');
+        var h = new Node<char>('h');
+
+        f.Next = i;
+        i.Next = s;
+        s.Next = h;
+
+        var head = Lib.DS.LinkedList<char>.Zipper(b, f);
+
+        var sb = new StringBuilder(6);
+
+        void Visit(Node<char> node)
+        {
+            sb.Append(node.Value);
+        }
+
+        Lib.DS.LinkedList<char>.Traverse(head, Visit, Lib.DS.LinkedList<char>.ExecutionMode.Iterative);
+
+        sb.ToString().Should().Be("bfuish");
+    }
+
+    [Fact]
+    public void Can_Zipper_Two_Single_Node_Lists()
+    {
+        var b = new Node<char>('b');
+
+        var f = new Node<char>('f');
+
+        var head = Lib.DS.LinkedList<char>.Zipper(b, f);
+
+        var sb = new StringBuilder(2);
+
+        void Visit(Node<char> node)
+        {
+            sb.Append(node.Value);
+        }
+
+        Lib.DS.LinkedList<char>.Traverse(head, Visit, Lib.DS.LinkedList<char>.ExecutionMode.Iterative);
+
+        sb.ToString().Should().Be("bf");
+    }
+
+    [Fact]
+    public void Zipper_When_Lists_Null_Throws()
+    {
+        var act1 = () => Lib.DS.LinkedList<char>.Zipper(null!, new Node<char>('a'));
+        act1.Should().Throw<ArgumentNullException>();
+
+        var act2 = () => Lib.DS.LinkedList<char>.Zipper(new Node<char>('a'), null!);
+        act2.Should().Throw<ArgumentNullException>();
+
+    }
 }

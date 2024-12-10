@@ -167,4 +167,51 @@ public class LinkedList<T>
 
         return previous!;
     }
+
+    /// <summary>
+    /// Zippers two linked lists together by alternating nodes from each list.
+    /// </summary>
+    /// <param name="head1">The head node of the first linked list.</param>
+    /// <param name="head2">The head node of the second linked list.</param>
+    /// <returns>The head node of the zipped linked list.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when either head1 or head2 is null.</exception>
+    public static Node<T> Zipper(Node<T> head1, Node<T> head2)
+    {
+        ArgumentNullException.ThrowIfNull(head1);
+        ArgumentNullException.ThrowIfNull(head2);
+
+        var current1 = head1.Next;
+        var current2 = head2;
+        var tail = head1;
+        var count = 0;
+
+        while (current1 != null && current2 != null)
+        {
+            if (count % 2 == 0)
+            {
+                tail.Next = current2;
+                current2 = current2.Next;
+            }
+            else
+            {
+                tail.Next = current1;
+                current1 = current1.Next;
+            }
+
+            tail = tail.Next;
+            count++;
+        }
+
+        if (current1 != null)
+        {
+            tail.Next = current1;
+        }
+
+        if (current2 != null)
+        {
+            tail.Next = current2;
+        }
+
+        return head1;
+    }
 }
