@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace TaroDSA.Lib.DS;
 /// <summary>
 /// Represents a node in a linked list.
@@ -84,31 +86,51 @@ public class LinkedList<T>
         TraverseRecursive(current.Next, visitAction);
     }
 
+    /// <summary>
+    /// Finds the first node in the linked list that contains the specified value.
+    /// </summary>
+    /// <param name="head">The head node of the linked list.</param>
+    /// <param name="value">The value to search for in the linked list.</param>
+    /// <returns>The first node that contains the specified value, or <c>null</c> if no such node is found.</returns>
     public static Node<T>? FindFirst(Node<T> head, T value)
     {
-        Node<T>? foundNode = null;
+        var current = head;
 
-        Traverse(head, Visit, ExecutionMode.Iterative);
-        return foundNode;
-
-        void Visit(Node<T>? node)
+        while (current != null)
         {
-            if (node == null)
+            if (current.Value != null)
             {
-                return;
+                if (current.Value.Equals(value))
+                {
+                    return current;
+                }
             }
 
-            if (node.Value == null)
-            {
-                return;
-            }
-
-            if (!node.Value.Equals(value))
-            {
-                return;
-            }
-
-            foundNode = node;
+            current = current.Next;
         }
+
+        return null;
+    }
+
+    public static Node<T> GetAtIndex(Node<T> head, int index)
+    {
+        ArgumentNullException.ThrowIfNull(head);
+        ArgumentOutOfRangeException.ThrowIfNegative(index);
+
+        var current = head;
+        var currentIndex = 0;
+
+        while (currentIndex < index)   
+        {
+            if (current == null)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            current = current.Next;
+            currentIndex++;
+        }
+
+        return current!;
     }
 }

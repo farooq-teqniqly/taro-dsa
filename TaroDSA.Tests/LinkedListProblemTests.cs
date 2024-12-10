@@ -87,4 +87,67 @@ public class LinkedListProblemTests
         }
 
     }
+
+    [Theory]
+    [InlineData(0, 2)]
+    [InlineData(1, 8)]
+    [InlineData(2, 3)]
+    [InlineData(3, 7)]
+    public void GetAtIndex_Returns_Expected_Result(int index, int expectedValue)
+    {
+        var first = new Node<int>(2);
+        var second = new Node<int>(8);
+        var third = new Node<int>(3);
+        var fourth = new Node<int>(7);
+
+        first.Next = second;
+        second.Next = third;
+        third.Next = fourth;
+
+        var result = Lib.DS.LinkedList<int>.GetAtIndex(first, index);
+
+        result.Value.Should().Be(expectedValue);
+    }
+
+    [Fact]
+    public void GetAtIndex_When_Walked_Past_End_Of_List_Throws()
+    {
+        var first = new Node<int>(2);
+        var second = new Node<int>(8);
+        var third = new Node<int>(3);
+        var fourth = new Node<int>(7);
+
+        first.Next = second;
+        second.Next = third;
+        third.Next = fourth;
+
+        var act = () => Lib.DS.LinkedList<int>.GetAtIndex(first, 10);
+
+        act.Should().Throw<IndexOutOfRangeException>();
+    }
+
+    [Fact]
+    public void GetAtIndex_When_Index_Negative_Throws()
+    {
+        var first = new Node<int>(2);
+        var second = new Node<int>(8);
+        var third = new Node<int>(3);
+        var fourth = new Node<int>(7);
+
+        first.Next = second;
+        second.Next = third;
+        third.Next = fourth;
+
+        var act = () => Lib.DS.LinkedList<int>.GetAtIndex(first, -1);
+
+        act.Should().Throw<ArgumentOutOfRangeException>();
+    }
+
+    [Fact]
+    public void GetAtIndex_When_Head_Is_Null_Throws()
+    {
+        var act = () => Lib.DS.LinkedList<int>.GetAtIndex(null!, 0);
+
+        act.Should().Throw<ArgumentNullException>();
+    }
 }
