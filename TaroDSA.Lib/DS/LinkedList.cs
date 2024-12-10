@@ -83,4 +83,32 @@ public class LinkedList<T>
         visitAction(current);
         TraverseRecursive(current.Next, visitAction);
     }
+
+    public static Node<T>? FindFirst(Node<T> head, T value)
+    {
+        Node<T>? foundNode = null;
+
+        Traverse(head, Visit, ExecutionMode.Iterative);
+        return foundNode;
+
+        void Visit(Node<T>? node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            if (node.Value == null)
+            {
+                return;
+            }
+
+            if (!node.Value.Equals(value))
+            {
+                return;
+            }
+
+            foundNode = node;
+        }
+    }
 }
