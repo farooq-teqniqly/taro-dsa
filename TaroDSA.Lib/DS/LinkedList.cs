@@ -112,25 +112,34 @@ public class LinkedList<T>
         return null;
     }
 
+    /// <summary>
+    /// Gets the node at the specified index in the linked list.
+    /// </summary>
+    /// <param name="head">The head node of the linked list.</param>
+    /// <param name="index">The zero-based index of the node to retrieve.</param>
+    /// <returns>The node at the specified index.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when the head node is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the index is negative.</exception>
+    /// <exception cref="IndexOutOfRangeException">Thrown when the index is out of the range of the linked list.</exception>
     public static Node<T> GetAtIndex(Node<T> head, int index)
     {
         ArgumentNullException.ThrowIfNull(head);
         ArgumentOutOfRangeException.ThrowIfNegative(index);
 
         var current = head;
-        var currentIndex = 0;
+        var currentIndex = index;
 
-        while (currentIndex < index)   
+        while (current != null)
         {
-            if (current == null)
+            if (currentIndex == 0)
             {
-                throw new IndexOutOfRangeException();
+                return current;
             }
 
             current = current.Next;
-            currentIndex++;
+            currentIndex--;
         }
 
-        return current!;
+        throw new IndexOutOfRangeException();
     }
 }
