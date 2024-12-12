@@ -210,10 +210,10 @@ public class LinkedListProblemTests
 
         var b = new Node<char>('b');
         var u = new Node<char>('u');
-        
+
 
         b.Next = u;
-        
+
         var head = Lib.DS.LinkedList<char>.Zipper(f, b);
 
         var sb = new StringBuilder(6);

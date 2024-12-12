@@ -53,4 +53,105 @@ public class BasicRecursionProblems
 
         return arr[firstIndex] + RecursiveSum(arr, firstIndex + 1);
     }
+
+    /// <summary>
+    /// Computes the nth Fibonacci number using a recursive approach.
+    /// </summary>
+    /// <param name="n">The position of the Fibonacci sequence to compute. Must be non-negative.</param>
+    /// <returns>The nth Fibonacci number.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// Thrown when <paramref name="n"/> is negative.
+    /// </exception>
+    /// <remarks>
+    /// Time complexity: O(2^n) due to repeated calculations of overlapping subproblems.
+    /// Space complexity: O(n) due to the recursion stack.
+    /// </remarks>
+    public static long FibonacciRecursive(int n)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(n);
+
+        return n switch
+        {
+            0 => 0,
+            1 => 1,
+            _ => FibonacciRecursive(n - 1) + FibonacciRecursive(n - 2)
+        };
+    }
+
+    /// <summary>
+    /// Computes the nth Fibonacci number using an iterative approach.
+    /// </summary>
+    /// <param name="n">The position of the Fibonacci sequence to compute. Must be non-negative.</param>
+    /// <returns>The nth Fibonacci number.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="n"/> is negative.</exception>
+    /// <remarks>
+    /// Time complexity: O(n) as it iterates through the sequence once.
+    /// Space complexity: O(1) as it uses a constant amount of space.
+    /// </remarks>
+    public static long FibonacciIterative(int n)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(n);
+
+        if (n == 0)
+        {
+            return 0;
+        }
+
+        if (n == 1)
+        {
+            return 1;
+        }
+
+        long prev = 0;
+        long curr = 1;
+
+        for (var i = 2; i <= n; i++)
+        {
+            var temp = curr;
+            curr = prev + curr;
+            prev = temp;
+        }
+
+        return curr;
+    }
+
+    /// <summary>
+    /// Computes the nth Fibonacci number using a recursive approach with caching to optimize performance.
+    /// </summary>
+    /// <param name="n">The position of the Fibonacci sequence to compute. Must be non-negative.</param>
+    /// <param name="cache">
+    /// A dictionary used to store previously computed Fibonacci numbers for reuse.
+    /// Keys represent the position in the Fibonacci sequence, and values represent the corresponding Fibonacci numbers.
+    /// </param>
+    /// <returns>The nth Fibonacci number.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="n"/> is negative.</exception>
+    /// <remarks>
+    /// Time complexity: O(n) due to memoization reducing redundant calculations.
+    /// Space complexity: O(n) for the recursion stack and the cache storage.
+    /// </remarks>
+    public static long FibonacciRecursiveWithCaching(int n, Dictionary<int, long> cache)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(n);
+
+        if (n == 0)
+        {
+            return 0;
+        }
+
+        if (n == 1)
+        {
+            return 1;
+        }
+
+        if (cache.TryGetValue(n, out var value))
+        {
+            return value;
+        }
+
+        var result = FibonacciRecursiveWithCaching(n - 1, cache) + FibonacciRecursiveWithCaching(n - 2, cache);
+
+        cache.Add(n, result);
+
+        return result;
+    }
 }

@@ -60,4 +60,53 @@ public class BasicRecursionProblemsTests
 
         act.Should().Throw<ArgumentNullException>();
     }
+
+    [Theory]
+    [InlineData(0, 0)]
+    [InlineData(1, 1)]
+    [InlineData(2, 1)]
+    [InlineData(6, 8)]
+    [InlineData(12, 144)]
+    [InlineData(25, 75025)]
+    public void FibonacciRecursive_Returns_Expected_Result(int n, long expectedResult)
+    {
+        BasicRecursionProblems.FibonacciRecursive(n).Should().Be(expectedResult);
+    }
+
+    [Theory]
+    [InlineData(0, 0)]
+    [InlineData(1, 1)]
+    [InlineData(2, 1)]
+    [InlineData(6, 8)]
+    [InlineData(12, 144)]
+    [InlineData(25, 75025)]
+    [InlineData(50, 12_586_269_025)]
+    public void FibonacciIterative_Returns_Expected_Result(int n, long expectedResult)
+    {
+        BasicRecursionProblems.FibonacciIterative(n).Should().Be(expectedResult);
+    }
+
+    [Theory]
+    [InlineData(0, 0)]
+    [InlineData(1, 1)]
+    [InlineData(2, 1)]
+    [InlineData(6, 8)]
+    [InlineData(12, 144)]
+    [InlineData(25, 75025)]
+    [InlineData(50, 12_586_269_025)]
+    public void FibonacciRecursiveWithCaching_Returns_Expected_Result(int n, long expectedResult)
+    {
+        var cache = new Dictionary<int, long>();
+
+        BasicRecursionProblems.FibonacciRecursiveWithCaching(n, cache).Should().Be(expectedResult);
+
+        if (n is 0 or 1)
+        {
+            cache.Count.Should().Be(0);
+        }
+        else
+        {
+            cache.Count.Should().Be(n - 1);
+        }
+    }
 }
