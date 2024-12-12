@@ -103,4 +103,50 @@ public class BinaryTreeTraversals
 
         }
     }
+
+    /// <summary>
+    /// Performs an iterative breadth-first traversal on a binary tree starting from the specified root node.
+    /// Time complexity: O(n) where `n` is the number of nodes.
+    /// Space complexity: O(n) for the queue.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type of the value stored in the tree nodes.
+    /// </typeparam>
+    /// <param name="root">
+    /// The root node of the binary tree to traverse. Must not be <c>null</c>.
+    /// </param>
+    /// <returns>
+    /// An <see cref="IEnumerable{T}"/> of <see cref="TreeNode{T}"/> objects representing the nodes
+    /// of the binary tree in breadth-first order.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when the <paramref name="root"/> is <c>null</c>.
+    /// </exception>
+    /// <remarks>
+    /// This method uses a queue to traverse the binary tree iteratively, visiting all nodes at the current
+    /// depth level before moving to the next depth level.
+    /// </remarks>
+    public static IEnumerable<TreeNode<T>> BreadthFirst<T>(TreeNode<T> root)
+    {
+        ArgumentNullException.ThrowIfNull(root);
+
+        var queue = new Queue<TreeNode<T>>([root]);
+
+        while (queue.Count != 0)
+        {
+            var current = queue.Dequeue();
+
+            yield return current;
+
+            if (current.Left != null)
+            {
+                queue.Enqueue(current.Left);
+            }
+
+            if (current.Right != null)
+            {
+                queue.Enqueue(current.Right);
+            }
+        }
+    }
 }
