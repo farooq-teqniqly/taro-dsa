@@ -80,9 +80,9 @@ public class BinaryTreeTraversals
     public static IEnumerable<TreeNode<T>> DepthFirstRecursive<T>(TreeNode<T> root)
     {
         ArgumentNullException.ThrowIfNull(root);
-        return DepthFirstRecursiveImpl(root);
+        return DepthFirstRecursiveLocal(root);
 
-        IEnumerable<TreeNode<TValue>> DepthFirstRecursiveImpl<TValue>(TreeNode<TValue>? currentRoot)
+        IEnumerable<TreeNode<TValue>> DepthFirstRecursiveLocal<TValue>(TreeNode<TValue>? currentRoot)
         {
             if (currentRoot == null)
             {
@@ -91,12 +91,12 @@ public class BinaryTreeTraversals
 
             yield return currentRoot;
 
-            foreach (var node in DepthFirstRecursiveImpl(currentRoot.Left))
+            foreach (var node in DepthFirstRecursiveLocal(currentRoot.Left))
             {
                 yield return node;
             }
 
-            foreach (var node in DepthFirstRecursiveImpl(currentRoot.Right))
+            foreach (var node in DepthFirstRecursiveLocal(currentRoot.Right))
             {
                 yield return node;
             }
