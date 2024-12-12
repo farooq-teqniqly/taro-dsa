@@ -156,4 +156,41 @@ public class BasicRecursionProblems
 
         return result;
     }
+
+    /// <summary>
+    /// Computes the nth Fibonacci number using Binet's formula.
+    /// </summary>
+    /// <param name="n">The position of the Fibonacci sequence to compute. Must be non-negative.</param>
+    /// <returns>The nth Fibonacci number.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// Thrown when <paramref name="n"/> is negative.
+    /// </exception>
+    /// <remarks>
+    /// This method uses Binet's formula to calculate the Fibonacci number, which involves
+    /// floating-point arithmetic. As a result, the output may lose precision for very large values of <paramref name="n"/>.
+    /// Time complexity: O(1) due to the direct computation.
+    /// Space complexity: O(1) as no additional memory is used.
+    /// </remarks>
+    public static long FibonacciUsingBinetFormula(int n)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(n);
+
+        if (n == 0)
+        {
+            return 0;
+        }
+
+        if (n == 1)
+        {
+            return 1;
+        }
+
+        var sqrt5 = Math.Sqrt(5);
+        var phi = (1 + sqrt5) / 2;
+        var phiConj = (1 - sqrt5) / 2;
+
+        var result = (Math.Pow(phi, n) - Math.Pow(phiConj, n)) / sqrt5;
+
+        return (long)result;
+    }
 }

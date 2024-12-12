@@ -109,4 +109,17 @@ public class BasicRecursionProblemsTests
             cache.Count.Should().Be(n - 1);
         }
     }
+
+    [Theory]
+    [InlineData(0, 0)]
+    [InlineData(1, 1)]
+    [InlineData(2, 1)]
+    [InlineData(6, 8)]
+    [InlineData(12, 144)]
+    [InlineData(25, 75025)]
+    [InlineData(50, 12_586_269_025)]
+    public void FibonacciUsingFormula_Returns_Expected_Result(int n, long expectedResult)
+    {
+        BasicRecursionProblems.FibonacciUsingBinetFormula(n).Should().Be(expectedResult);
+    }
 }
