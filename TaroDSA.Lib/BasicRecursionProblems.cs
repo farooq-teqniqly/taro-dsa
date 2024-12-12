@@ -125,6 +125,7 @@ public class BasicRecursionProblems
     /// </param>
     /// <returns>The nth Fibonacci number.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="n"/> is negative.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="cache"/> is <c>null</c>.</exception>
     /// <remarks>
     /// Time complexity: O(n) due to memoization reducing redundant calculations.
     /// Space complexity: O(n) for the recursion stack and the cache storage.
@@ -132,6 +133,7 @@ public class BasicRecursionProblems
     public static long FibonacciRecursiveWithCaching(int n, Dictionary<int, long> cache)
     {
         ArgumentOutOfRangeException.ThrowIfNegative(n);
+        ArgumentNullException.ThrowIfNull(cache);
 
         if (n == 0)
         {
