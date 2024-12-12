@@ -149,4 +149,97 @@ public class BinaryTreeTraversals
             }
         }
     }
+
+    /// <summary>
+    /// Calculates the sum of all node values in a binary tree starting from the specified root node.
+    /// </summary>
+    /// <param name="root">
+    /// The root node of the binary tree. Must not be <c>null</c>.
+    /// </param>
+    /// <returns>
+    /// The sum of all node values in the binary tree.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when the <paramref name="root"/> is <c>null</c>.
+    /// </exception>
+    /// <remarks>
+    /// This method performs a breadth-first traversal of the binary tree to compute the sum of all node values.
+    /// It leverages the <see cref="BreadthFirst{T}"/> method for traversal.
+    /// </remarks>
+    public static int TreeSum(TreeNode<int> root)
+    {
+        return BreadthFirst(root).Sum(node => node.Value);
+    }
+
+    /// <summary>
+    /// Determines whether a binary tree includes a node with the specified value.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type of the value stored in the tree nodes.
+    /// </typeparam>
+    /// <param name="root">
+    /// The root node of the binary tree to search. Must not be <c>null</c>.
+    /// </param>
+    /// <param name="value">
+    /// The value to search for in the binary tree.
+    /// </param>
+    /// <returns>
+    /// The first <see cref="TreeNode{T}"/> containing the specified value, or <c>null</c> if no such node exists.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when the <paramref name="root"/> is <c>null</c>.
+    /// </exception>
+    /// <remarks>
+    /// This method performs a breadth-first traversal of the binary tree to locate the first node
+    /// whose value matches the specified <paramref name="value"/>.
+    /// </remarks>
+    public static TreeNode<T>? TreeIncludes<T>(TreeNode<T> root, T value)
+    {
+        return BreadthFirst(root).FirstOrDefault(node => node.Value != null && node.Value.Equals(value));
+    }
+
+    /// <summary>
+    /// Finds the node with the minimum value in a binary tree using a breadth-first traversal.
+    /// </summary>
+    /// <param name="root">
+    /// The root node of the binary tree. Must not be <c>null</c>.
+    /// </param>
+    /// <returns>
+    /// The <see cref="TreeNode{T}"/> containing the minimum value in the binary tree.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when the <paramref name="root"/> is <c>null</c>.
+    /// </exception>
+    /// <remarks>
+    /// This method traverses the binary tree in breadth-first order and compares the values of the nodes
+    /// to determine the node with the smallest value.
+    /// </remarks>
+    public static TreeNode<int> TreeMin(TreeNode<int> root)
+    {
+        return BreadthFirst(root).Aggregate((minNode, currentNode) =>
+            currentNode.Value < minNode.Value ? currentNode : minNode);
+    }
+
+    /// <summary>
+    /// Finds the node with the maximum value in a binary tree starting from the specified root node.
+    /// </summary>
+    /// <param name="root">
+    /// The root node of the binary tree to search. Must not be <c>null</c>.
+    /// </param>
+    /// <returns>
+    /// The <see cref="TreeNode{T}"/> containing the maximum value in the binary tree.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when the <paramref name="root"/> is <c>null</c>.
+    /// </exception>
+    /// <remarks>
+    /// This method performs a breadth-first traversal of the binary tree to find the node with the maximum value.
+    /// The traversal ensures that all nodes are visited, and the maximum value is determined by comparing the
+    /// <see cref="TreeNode{T}.Value"/> of each node.
+    /// </remarks>
+    public static TreeNode<int> TreeMax(TreeNode<int> root)
+    {
+        return BreadthFirst(root).Aggregate((maxNode, currentNode) =>
+            currentNode.Value > maxNode.Value ? currentNode : maxNode);
+    }
 }
