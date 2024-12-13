@@ -129,4 +129,46 @@ public class BinaryTreeTraversalTests
 
         result.Value.Should().Be(11);
     }
+
+    [Fact]
+    public void PathSum_Max_Returns_Expected_Result()
+    {
+        var a = new TreeNode<int>(3);
+        var b = new TreeNode<int>(11);
+        var c = new TreeNode<int>(4);
+        var d = new TreeNode<int>(4);
+        var e = new TreeNode<int>(-2);
+        var f = new TreeNode<int>(1);
+
+        a.Left = b;
+        a.Right = c;
+        b.Left = d;
+        b.Right = e;
+        c.Right = f;
+
+        var result = BinaryTreeTraversals.PathSum(a);
+
+        result.Should().Be(18);
+    }
+
+    [Fact]
+    public void PathSum_Min_Returns_Expected_Result()
+    {
+        var a = new TreeNode<int>(3);
+        var b = new TreeNode<int>(11);
+        var c = new TreeNode<int>(4);
+        var d = new TreeNode<int>(4);
+        var e = new TreeNode<int>(-2);
+        var f = new TreeNode<int>(1);
+
+        a.Left = b;
+        a.Right = c;
+        b.Left = d;
+        b.Right = e;
+        c.Right = f;
+
+        var result = BinaryTreeTraversals.PathSum(a, BinaryTreeTraversals.SumType.Min);
+
+        result.Should().Be(8);
+    }
 }

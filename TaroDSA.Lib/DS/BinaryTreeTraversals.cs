@@ -242,4 +242,94 @@ public class BinaryTreeTraversals
         return BreadthFirst(root).Aggregate((maxNode, currentNode) =>
             currentNode.Value > maxNode.Value ? currentNode : maxNode);
     }
+
+    /// <summary>
+    /// Specifies the type of sum to compute in a binary tree.
+    /// </summary>
+    /// <remarks>
+    /// This enumeration is used to indicate whether to compute the maximum or minimum path sum in a binary tree.
+    /// </remarks>
+    /// <summary>
+    /// Indicates that the maximum path sum should be computed.
+    /// </summary>
+    /// <summary>
+    /// Indicates that the minimum path sum should be computed.
+    /// </summary>
+    public enum SumType
+    {
+        Max,
+        Min
+    }
+
+    /// <summary>
+    /// Computes the maximum or minimum path sum in a binary tree, depending on the specified <paramref name="sumType"/>.
+    /// Time complexity: O(n) where `n` is the number of nodes.
+    /// Space complexity: O(n) because of the recursion.
+    /// </summary>
+    /// <param name="root">
+    /// The root node of the binary tree. If <c>null</c>, the method returns <see cref="int.MinValue"/> for <see cref="SumType.Max"/> 
+    /// or <see cref="int.MaxValue"/> for <see cref="SumType.Min"/>.
+    /// </param>
+    /// <param name="sumType">
+    /// Specifies whether to compute the maximum or minimum path sum. Defaults to <see cref="SumType.Max"/>.
+    /// </param>
+    /// <returns>
+    /// The computed path sum. If the tree is empty, returns <see cref="int.MinValue"/> for <see cref="SumType.Max"/> 
+    /// or <see cref="int.MaxValue"/> for <see cref="SumType.Min"/>.
+    /// </returns>
+    /// <remarks>
+    /// A path is defined as any sequence of nodes from the root to a leaf. The method recursively computes the path sums 
+    /// for the left and right subtrees and combines them with the value of the current node.
+    /// </remarks>
+    /// <example>
+    /// <code>
+    /// var root = new TreeNode<int>(3)
+    /// {
+    ///     Left = new TreeNode<int>(11)
+    ///     {
+    ///         Left = new TreeNode<int>(4),
+    ///         Right = new TreeNode<int>(-2)
+    ///     },
+    ///     Right = new TreeNode<int>(4)
+    ///     {
+    ///         Right = new TreeNode<int>(1)
+    ///     }
+    /// };
+    /// 
+    /// var maxSum = BinaryTreeTraversals.PathSum(root); // Returns 18
+    /// var minSum = BinaryTreeTraversals.PathSum(root, BinaryTreeTraversals.SumType.Min); // Returns 8
+    /// </code>
+    /// </example>
+    public static int PathSum(TreeNode<int>? root, SumType sumType = SumType.Max)
+    {
+        if (root == null)
+        {
+            return sumType == SumType.Max ? int.MinValue : int.MaxValue;
+        }
+
+        if (root.Left == null && root.Right == null)
+        {
+            return root.Value;
+        }
+
+        var leftSum = PathSum(root.Left);
+        var rightSum = PathSum(root.Right);
+
+        if (sumType == SumType.Max)
+        {
+            return root.Value + Max(leftSum, rightSum);
+        }
+
+        return root.Value + Min(leftSum, rightSum);
+
+        int Max(int x, int y)
+        {
+            return x > y ? x : y;
+        }
+
+        int Min(int x, int y)
+        {
+            return x < y ? x : y;
+        }
+    }
 }
